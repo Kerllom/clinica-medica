@@ -1,0 +1,53 @@
+# ===== Sistema Operacional =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Editores / IDEs =====
+.vscode/
+.idea/
+*.iml
+*.suo
+*.user
+nbproject/
+.settings/
+.project
+.classpath
+
+# ===== Java =====
+*.class
+target/
+build/
+*.jar
+*.war
+bin/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+*.egg-info/
+
+# ===== C# / .NET =====
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.pdb
+
+# ===== Node (caso usem front web) =====
+node_modules/
+dist/
+.env
+
+# ===== Banco de dados (nao versionar dados, so o script) =====
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== Arquivos sensiveis =====
+*.local
+config.local.*
+credentials.*
