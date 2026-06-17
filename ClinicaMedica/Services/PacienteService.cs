@@ -6,19 +6,19 @@ using ClinicaMedica.Data;
 
 namespace ClinicaMedica.Services
 {
-    // =================================================================
+    
     // SERVICE do Paciente.
     // Camada de REGRAS DE NEGOCIO do cadastro de pacientes.
     // Cumpre o RNF05 (validacao dos dados de entrada): valida nome,
     // CPF e e-mail ANTES de gravar no banco, e impede CPF duplicado.
-    // =================================================================
+    
     public class PacienteService
     {
         private PacienteDAO pacienteDAO = new PacienteDAO();
 
-        // -------------------------------------------------------------
+        
         // CADASTRAR: valida os dados e, se tudo certo, insere.
-        // -------------------------------------------------------------
+        
         public void CadastrarPaciente(Paciente paciente)
         {
             // Aplica todas as validacoes (lanca Exception se algo falhar).
@@ -32,9 +32,9 @@ namespace ClinicaMedica.Services
             pacienteDAO.Inserir(paciente);
         }
 
-        // -------------------------------------------------------------
+        
         // ATUALIZAR: valida e atualiza um paciente existente.
-        // -------------------------------------------------------------
+        
         public void AtualizarPaciente(Paciente paciente)
         {
             Validar(paciente);
@@ -48,9 +48,9 @@ namespace ClinicaMedica.Services
             pacienteDAO.Atualizar(paciente);
         }
 
-        // -------------------------------------------------------------
+        
         // EXCLUIR e consultas simples: repassam para o DAO.
-        // -------------------------------------------------------------
+       
         public void ExcluirPaciente(int id)
         {
             pacienteDAO.Excluir(id);
@@ -66,10 +66,10 @@ namespace ClinicaMedica.Services
             return pacienteDAO.ListarTodos();
         }
 
-        // -------------------------------------------------------------
+        
         // VALIDAR (privado): concentra todas as regras de validacao.
         // Reaproveitado por Cadastrar e Atualizar.
-        // -------------------------------------------------------------
+       
         private void Validar(Paciente paciente)
         {
             // Nome obrigatorio.

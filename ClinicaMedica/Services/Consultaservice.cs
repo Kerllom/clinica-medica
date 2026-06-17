@@ -33,7 +33,7 @@ namespace ClinicaMedica.Services
             if (dataHora < DateTime.Now)
                 throw new Exception("Nao e possivel agendar em uma data ou horario que ja passou.");
 
-            // REGRA 2 (RF04/RF05): o horario precisa estar livre para o medico.
+            // REGRA 2: o horario precisa estar livre para o medico.
             if (!consultaDAO.HorarioDisponivel(consulta.IdMedico, consulta.Data, consulta.Horario))
                 throw new Exception("Este horario ja esta ocupado para o medico selecionado. Escolha outro.");
 
