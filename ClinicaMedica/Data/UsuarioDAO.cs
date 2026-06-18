@@ -1,4 +1,5 @@
-﻿using System;
+// /Data/UsuarioDAO.cs
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using ClinicaMedica.Models;
@@ -7,7 +8,7 @@ namespace ClinicaMedica.Data
 {
     /// <summary>
     /// Responsável pelo acesso ao banco de dados para a entidade Usuario.
-    /// Operações: Inserir, Atualizar, Excluir, BuscarPorId, ListarTodos.
+    /// Operações: Inserir, Atualizar, Excluir, BuscarPorId, BuscarPorLogin, ListarTodos.
     /// </summary>
     public class UsuarioDAO
     {
@@ -16,17 +17,14 @@ namespace ClinicaMedica.Data
         /// </summary>
         public void Inserir(Usuario obj)
         {
-            // Abre a conexão usando o bloco 'using' para garantir o fechamento automático
             using (var conexao = Conexao.ObterConexao())
             {
                 conexao.Open();
 
-                // Comando SQL com parâmetros para evitar SQL Injection
                 string sql = "INSERT INTO usuario (login, senha, tipo) VALUES (@login, @senha, @tipo)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    // Vincula os parâmetros aos valores do objeto
                     cmd.Parameters.AddWithValue("@login", obj.Login);
                     cmd.Parameters.AddWithValue("@senha", obj.Senha);
                     cmd.Parameters.AddWithValue("@tipo", obj.Tipo);
@@ -79,8 +77,7 @@ namespace ClinicaMedica.Data
         }
 
         /// <summary>
-        /// Busca um único usuário pelo ID.
-        /// Retorna null se não encontrado.
+        /// Busca um único usuário pelo ID. Retorna null se não encontrado.
         /// </summary>
         public Usuario BuscarPorId(int id)
         {
@@ -98,20 +95,54 @@ namespace ClinicaMedica.Data
                     {
                         if (reader.Read())
                         {
-                            // Monta e retorna o objeto preenchido com os dados do banco
                             return new Usuario
                             {
-                                Id = Convert.ToInt32(reader["id"]),
+                                Id    = Convert.ToInt32(reader["id"]),
                                 Login = reader.GetString("login"),
                                 Senha = reader.GetString("senha"),
-                                Tipo = reader.GetString("tipo")
+                                Tipo  = reader.GetString("tipo")
                             };
                         }
                     }
                 }
             }
 
-            return null; // Não encontrado
+            return null;
+        }
+
+        /// <summary>
+        /// Busca um usuário pelo LOGIN. Usado na tela de login (RF02).
+        /// Retorna null se não encontrar.
+        /// </summary>
+        public Usuario BuscarPorLogin(string login)
+        {
+            using (var conexao = Conexao.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT id, login, senha, tipo FROM usuario WHERE login = @login";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@login", login);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Usuario
+                            {
+                                Id    = Convert.ToInt32(reader["id"]),
+                                Login = reader.GetString("login"),
+                                Senha = reader.GetString("senha"),
+                                Tipo  = reader.GetString("tipo")
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -134,10 +165,10 @@ namespace ClinicaMedica.Data
                     {
                         lista.Add(new Usuario
                         {
-                            Id = Convert.ToInt32(reader["id"]),
+                            Id    = Convert.ToInt32(reader["id"]),
                             Login = reader.GetString("login"),
                             Senha = reader.GetString("senha"),
-                            Tipo = reader.GetString("tipo")
+                            Tipo  = reader.GetString("tipo")
                         });
                     }
                 }
