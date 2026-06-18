@@ -11,11 +11,12 @@ Programação Orientada a Objetos.
 
 | Integrante | Responsabilidade |
 |-----------|------------------|
-| Kerllote | Models e DAOs (Paciente, Consulta, Pagamento, Prontuário) + Services |
+| Kerllom | Models e DAOs (Paciente, Consulta, Pagamento, Prontuário) + Services |
 | Igor | Models e DAOs (Usuário, Especialidade, Médico, Recepcionista) |
-| [Integrante 3] | Interface gráfica (Forms) |
-| [Integrante 4] | [função] |
-| [Integrante 5] | Integração e GitHub |
+| Mateus | Interface gráfica (Forms) |
+| Ricardo | Banco de Dados MySQL WorkBench |
+| Mainã | Interface gráfica (Forms) |
+| Nicolas | Interface gráfica (Forms) |
 
 > Preencha os nomes reais da equipe.
 
